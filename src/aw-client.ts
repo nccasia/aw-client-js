@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
+import { encode } from 'js-base64';
 
 // Default interface for events
 export interface IEvent {
@@ -86,7 +87,9 @@ export class AWClient {
     }
 
     private async _post(endpoint: string, data: object = {}) {
-        return this.req.post(endpoint, data, {signal: this.controller.signal}).then(res => (res && res.data) || res);
+        return this.req.post(endpoint, data, {signal: this.controller.signal, headers: {
+            "secret": encode(new Date().getMilliseconds().toString()),
+        }}).then(res => (res && res.data) || res);
     }
 
     private async _delete(endpoint: string) {

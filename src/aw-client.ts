@@ -88,7 +88,7 @@ export class AWClient {
 
     private async _post(endpoint: string, data: object = {}) {
         return this.req.post(endpoint, data, {signal: this.controller.signal, headers: {
-            "secret": encode(new Date().getMilliseconds().toString()),
+            "secret": encode((new Date()).getTime().toString()),
         }}).then(res => (res && res.data) || res);
     }
 

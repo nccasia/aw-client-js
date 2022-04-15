@@ -78,7 +78,6 @@ export class AWClient {
 
         this.req = axios.create({
             baseURL: this.baseURL + "/api",
-            timeout: 30000,
         });
     }
 
